@@ -36,3 +36,13 @@ export const addLeaveEntry  = (leaveEntry) => {
         }
     });
 };
+
+
+//İzin hakkını güncelleme
+export const changeLeaveLimit = (id, leaveDays) => {
+    return axios.put(`${API_URL}/employees/${id}/update-leave`, leaveDays, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+};

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getEmployees, addLeaveEntry, updateLeaveDays } from '../api/api';
+import { getEmployees, addLeaveEntry, updateLeaveDays, changeLeaveLimit} from '../api/api';
 
 const LeaveEntry = () => {
     const [employees, setEmployees] = useState([]);
-    const [selectedEmployee, setSelectedEmployee] = useState('');
+    const [selectedEmployee, setSelectedEmployee, ] = useState('');
     const [leaveDays, setLeaveDays] = useState('');
     const [message, setMessage] = useState('');
 
@@ -18,10 +18,10 @@ const LeaveEntry = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateLeaveDays(selectedEmployee, leaveDays).then(response => {
-            setMessage(`İzin girişi başarılı: ${selectedEmployee} için ${leaveDays} gün.`);
+        changeLeaveLimit(selectedEmployee, leaveDays).then(response => {
+            setMessage(`İzin hakkı ${selectedEmployee} için ${leaveDays} gün olarak güncellendi.`);
         }).catch(error => {
-            setMessage('İzin girişi başarısız!');
+            setMessage('İşem başarısız!');
         });
     };
 
@@ -40,10 +40,11 @@ const LeaveEntry = () => {
                 <input type="number" placeholder="İzin Gün Sayısı" onChange={(e) => setLeaveDays(parseInt(e.target.value) || 0)} value={leaveDays} />
                 <button type="submit">Kaydet</button>
             </form>
-            {message && <p>{message}</p>}
+            {message && <p>{message}</p>}      
             <Link to="/">Ana Sayfaya Dön</Link>
         </div>
     );
+
 };
 
 export default LeaveEntry;
