@@ -1,0 +1,120 @@
+/* styles.css */
+
+.App nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.App nav ul li {
+    margin-right: 10px;
+}
+
+.App nav ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.App nav ul li a:hover {
+    color: #0056b3;
+}
+
+.home-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.home-container h1 {
+    margin-bottom: 20px;
+}
+
+.home-container p {
+    margin-bottom: 20px;
+}
+
+.home-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Kutuları ortalar */
+    gap: 10px; /* Kutular arasında boşluk */
+}
+
+.home-links li {
+    margin: 10px 0;
+}
+
+.home-links li a {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.home-links li a:hover {
+    background: #0056b3;
+}
+
+.employee-list-container, .form-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.employee-list-container h2, .form-container h2 {
+    margin-bottom: 20px;
+}
+
+.employee-list-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.employee-list-container li {
+    background: #f0f0f0;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.employee-list-container a, .form-container a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.employee-list-container a:hover, .form-container a:hover {
+    background: #0056b3;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-container input, .form-container select, .form-container button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-container button {
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background: #0056b3;
+}
