@@ -23,7 +23,7 @@ const EmployeeList = () => {
                     </li>
                 ))}
             </ul>
-            <Link to="/">Ana Sayfaya Dön</Link>
+            <Link to="/home">Ana Sayfaya Dön</Link>
         </div>
     );
 };

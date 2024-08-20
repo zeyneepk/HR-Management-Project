@@ -41,7 +41,7 @@ const LeaveEntry = () => {
                 <button type="submit">Kaydet</button>
             </form>
             {message && <p>{message}</p>}      
-            <Link to="/">Ana Sayfaya Dön</Link>
+            <Link to="/home">Ana Sayfaya Dön</Link>
         </div>
     );
 

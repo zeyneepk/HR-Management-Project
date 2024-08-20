@@ -35,9 +35,10 @@ const AddEmployee = () => {
                 <input type="text" name="lastName" placeholder="Soyad" onChange={handleChange} value={employee.lastName} />
                 <input type="email" name="email" placeholder="Email" onChange={handleChange} value={employee.email} />
                 <input type="text" name="department" placeholder="Departman" onChange={handleChange} value={employee.department} />
+
                 <button type="submit">Kaydet</button>
             </form>
-            <Link to="/">Ana Sayfaya Dön</Link>
+            <Link to="/home">Ana Sayfaya Dön</Link>
         </div>
     );
 };
