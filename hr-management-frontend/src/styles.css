@@ -118,3 +118,62 @@
 .form-container button:hover {
     background: #0056b3;
 }
+
+/* Login Sayfası Stilleri */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Tüm metni ortalar */
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: center; /* Giriş alanlarını ortalar */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: center; /* Etiketleri ortalar */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+button {
+    width: 50%; /* Butonun genişliğini küçültür */
+    padding: 8px; /* Butonu daha küçük yapar */
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px; /* Buton ile üst eleman arasındaki boşluğu arttırır */
+}
+
+button:hover {
+    background-color: #0056b3;
+}

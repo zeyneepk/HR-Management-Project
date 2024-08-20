@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Login from './components/Login';
 import EmployeeList from './components/EmployeeList';
 import AddEmployee from './components/AddEmployee';
 import LeaveEntry from './components/LeaveEntry';
@@ -11,7 +12,8 @@ function App() {
         <Router>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={
+                    <Route path="/" element={<Login />} />
+                    <Route path="/home" element={
                         <div className="home-container">
                             <h1>Hoş Geldiniz</h1>
                             <p>Lütfen bir seçenek seçiniz:</p>
