@@ -30,5 +30,8 @@ public class EmployeeController {
         return employeeService.updateLeaveDays(id, leaveDays);
     }
 
-
+    @PutMapping("/{id}/update-leave")
+    public Employee changeLeaveLimit(@PathVariable Long id, @RequestBody Integer leaveDays) {
+        return employeeService.changeLeaveLimit(id, leaveDays);
+    }
 }

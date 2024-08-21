@@ -11,6 +11,7 @@ public class LeaveController {
     @Autowired
     private LeaveService leaveService;
 
+
     @PostMapping
     public Leave addLeaveEntry(@RequestBody Leave leave) {
         return leaveService.addLeaveEntry(leave);

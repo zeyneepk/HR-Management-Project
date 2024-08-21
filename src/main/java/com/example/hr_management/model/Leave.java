@@ -1,11 +1,7 @@
 package com.example.hr_management.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "leaves")
@@ -17,7 +13,14 @@ public class Leave {
     @ManyToOne
     private Employee employee; // Hangi çalışanın izni olduğunu belirtir
 
-    private int daysRequested; // Talep edilen izin günleri
+    @Column(name = "start_date")
+    private Date startDate;
+
+    @Column(name = "end_date")
+    private Date endDate;
+
+    @Column(name = "daysRequested")
+    private int daysRequested; // Implies the requested leave days
 
     // Getters and setters
     public Long getId() {
@@ -35,6 +38,7 @@ public class Leave {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
 
     public int getDaysRequested() {
         return daysRequested;

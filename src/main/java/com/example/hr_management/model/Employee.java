@@ -2,7 +2,6 @@ package com.example.hr_management.model;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -16,7 +15,7 @@ public class Employee {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "department")
@@ -24,6 +23,9 @@ public class Employee {
 
     @Column(name = "leave_days", nullable = false)
     private int leaveDays = 15; // Çalışanın kalan izin günleri
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
 
     // Getters and setters
@@ -74,4 +76,14 @@ public class Employee {
     public void setLeaveDays(int leaveDays) {
         this.leaveDays = leaveDays;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        // Password hashleniyor
+        this.password = password;
+    }
+
 }

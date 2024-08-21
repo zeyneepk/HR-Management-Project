@@ -16,11 +16,15 @@ public class LeaveService {
     private EmployeeRepository employeeRepository;
 
     public Leave addLeaveEntry(Leave leave) {
-        // İzin günlerini çalışanın toplam izin günlerinden düş
+        if (leave == null || leave.getEmployee() == null) {
+            throw new IllegalArgumentException("Leave or Employee cannot be null");
+        }
+
         Employee employee = leave.getEmployee();
         employee.setLeaveDays(employee.getLeaveDays() - leave.getDaysRequested());
         employeeRepository.save(employee);
 
         return leaveRepository.save(leave);
     }
+
 }
