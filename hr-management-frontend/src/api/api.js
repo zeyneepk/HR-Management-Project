@@ -28,7 +28,7 @@ export const updateLeaveDays = (id, leaveDays) => {
     });
 };
 
-// Yeni İzin Girişi Ekleme
+// Yeni İzin Girişi Ekleme  (leaves tablosuna)
 export const addLeaveEntry  = (leaveEntry) => {
     return axios.post(`${API_URL}/leaves`, leaveEntry, {
         headers: {

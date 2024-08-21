@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getEmployees, addLeaveEntry, updateLeaveDays } from '../api/api';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { getEmployees, addLeaveEntry } from '../api/api';
 
 const LeaveEntry = () => {
     const [employees, setEmployees] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState('');
-    const [leaveDays, setLeaveDays] = useState('');
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
     const [message, setMessage] = useState('');
 
     useEffect(() => {
@@ -18,11 +21,26 @@ const LeaveEntry = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateLeaveDays(selectedEmployee, leaveDays).then(response => {
-            setMessage(`İzin girişi başarılı: ${selectedEmployee} için ${leaveDays} gün.`);
-        }).catch(error => {
-            setMessage('İzin girişi başarısız!');
-        });
+
+        if (startDate && endDate && selectedEmployee) {
+            const daysRequested = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1; // Calculate number of days
+
+            const leaveEntry = {
+                employee: { id: selectedEmployee },
+                startDate: startDate.toISOString(), // Ensure dates are in the correct format
+                endDate: endDate.toISOString(),
+                daysRequested
+            };
+            
+
+            addLeaveEntry(leaveEntry).then(response => {
+                setMessage(`İzin girişi başarılı: ${selectedEmployee} için ${daysRequested} gün.`);
+            }).catch(error => {
+                setMessage('İzin girişi başarısız!');
+            });
+        } else {
+            setMessage('Lütfen tüm alanları doldurun!');
+        }
     };
 
     return (
@@ -37,7 +55,8 @@ const LeaveEntry = () => {
                         </option>
                     ))}
                 </select>
-                <input type="number" placeholder="İzin Gün Sayısı" onChange={(e) => setLeaveDays(parseInt(e.target.value) || 0)} value={leaveDays} />
+                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} placeholderText="Başlangıç Tarihi" />
+                <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} placeholderText="Bitiş Tarihi" />
                 <button type="submit">Kaydet</button>
             </form>
             {message && <p>{message}</p>}
@@ -46,4 +65,4 @@ const LeaveEntry = () => {
     );
 };
 
-export default LeaveEntry;
+export default LeaveEntry;

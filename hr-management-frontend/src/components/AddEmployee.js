@@ -6,8 +6,9 @@ const AddEmployee = () => {
     const [employee, setEmployee] = useState({
         firstName: '',
         lastName: '',
+        department: '',
         email: '',
-        department: ''
+        password: ''
     });
 
     const [message, setMessage] = useState('');
@@ -33,9 +34,9 @@ const AddEmployee = () => {
             <form onSubmit={handleSubmit}>
                 <input type="text" name="firstName" placeholder="Ad" onChange={handleChange} value={employee.firstName} />
                 <input type="text" name="lastName" placeholder="Soyad" onChange={handleChange} value={employee.lastName} />
-                <input type="email" name="email" placeholder="Email" onChange={handleChange} value={employee.email} />
                 <input type="text" name="department" placeholder="Departman" onChange={handleChange} value={employee.department} />
-
+                <input type="email" name="email" placeholder="Email" onChange={handleChange} value={employee.email} />
+                <input type="password" name="password" placeholder="Password" onChange={handleChange} value={employee.password} />
                 <button type="submit">Kaydet</button>
             </form>
             <Link to="/home">Ana Sayfaya Dön</Link>
