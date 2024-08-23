@@ -62,6 +62,7 @@ const LeaveEntry = () => {
             </form>
             {message && <p>{message}</p>}
             <Link to="/home">Ana Sayfaya Dön</Link>
+            <Link to="/">Çıkış Yap</Link>
         </div>
     );
 };

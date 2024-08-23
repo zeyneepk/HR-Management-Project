@@ -5,6 +5,8 @@ import EmployeeList from './components/EmployeeList';
 import AddEmployee from './components/AddEmployee';
 import LeaveEntry from './components/LeaveEntry';
 import UpdateLeaveLimit from './components/UpdateLeaveLimit';
+import HomeEmployee from './components/HomeEmployee';
+import LoginEmployee from './components/LoginEmployee';
 import './styles.css'; // Global CSS dosyasını dahil et
 
 function App() {
@@ -12,7 +14,19 @@ function App() {
         <Router>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<Login />} />
+                    <Route path="/" element={
+                        <div className="home-container">
+                            <h1>Hoş Geldiniz</h1>
+                            <p>Lütfen kullanıcı tipinizi seçin:</p>
+                            <ul className="home-links">
+                                <li><Link to="/employee-login">Çalışan</Link></li>
+                                <li><Link to="/admin-login">Admin</Link></li>
+                            </ul>
+                        </div>
+                     } />
+                    <Route path="/employee-login" element={<LoginEmployee />} />
+                    <Route path="/admin-login" element={<Login />} />
+                    
                     <Route path="/home" element={
                         <div className="home-container">
                             <h1>Hoş Geldiniz</h1>
@@ -25,6 +39,7 @@ function App() {
                             </ul>
                         </div>
                     } />
+                    <Route path="/home-employee" element={<HomeEmployee />} />
                     <Route path="/add" element={<AddEmployee />} />
                     <Route path="/leave" element={<LeaveEntry />} />
                     <Route path="/employee-list" element={<EmployeeList />} />

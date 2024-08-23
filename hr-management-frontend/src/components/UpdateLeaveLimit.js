@@ -21,7 +21,7 @@ const LeaveEntry = () => {
         changeLeaveLimit(selectedEmployee, leaveDays).then(response => {
             setMessage(`İzin hakkı ${selectedEmployee} için ${leaveDays} gün olarak güncellendi.`);
         }).catch(error => {
-            setMessage('İşem başarısız!');
+            setMessage('İşlem başarısız!');
         });
     };
 
@@ -42,6 +42,7 @@ const LeaveEntry = () => {
             </form>
             {message && <p>{message}</p>}      
             <Link to="/home">Ana Sayfaya Dön</Link>
+            <Link to="/">Çıkış Yap</Link>
         </div>
     );
 

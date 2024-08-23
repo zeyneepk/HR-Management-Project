@@ -19,8 +19,6 @@ export const addEmployee = (employee) => {
 
 // İzin Günlerini Güncelleme (leaves tablosuna da ekliyor olleeey )
 export const updateLeaveDays = (id, leaveDays) => {
-    
-    
     return axios.put(`${API_URL}/employees/${id}/leave`, leaveDays, {
         headers: {
             'Content-Type': 'application/json'
@@ -45,4 +43,9 @@ export const changeLeaveLimit = (id, leaveDays) => {
             'Content-Type': 'application/json'
         }
     });
+};
+
+// İzinleri Getirme
+export const getLeaves = async () => {
+    return axios.get(`${API_URL}/leaves`);
 };
