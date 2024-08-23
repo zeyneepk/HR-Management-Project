@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { getEmployees, addLeaveEntry } from '../api/api';
+import { getEmployees, addLeaveEntry, updateLeaveDays } from '../api/api';
 
 const LeaveEntry = () => {
     const [employees, setEmployees] = useState([]);
@@ -33,11 +33,12 @@ const LeaveEntry = () => {
             };
             
 
-            addLeaveEntry(leaveEntry).then(response => {
-                setMessage(`İzin girişi başarılı: ${selectedEmployee} için ${daysRequested} gün.`);
+            updateLeaveDays(selectedEmployee, leaveEntry).then(response => {
+                setMessage(`İzin girişi başarılı: ${selectedEmployee} için ${leaveEntry.daysRequested} gün.`);
             }).catch(error => {
                 setMessage('İzin girişi başarısız!');
             });
+
         } else {
             setMessage('Lütfen tüm alanları doldurun!');
         }

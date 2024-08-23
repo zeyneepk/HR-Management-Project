@@ -24,12 +24,12 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee updateLeaveDays(Long id, Integer leaveDays) {
+    public Employee updateLeaveDays(Long id, Leave leave) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow();
-        employee.setLeaveDays(employee.getLeaveDays()-leaveDays);
+        employee.setLeaveDays(employee.getLeaveDays()-leave.getDaysRequested());
 
-
+        leaveRepository.save(leave);
         return employeeRepository.save(employee);
     }
 

@@ -1,6 +1,7 @@
 package com.example.hr_management.controller;
 
 import com.example.hr_management.model.Employee;
+import com.example.hr_management.model.Leave;
 import com.example.hr_management.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,8 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}/leave")
-    public Employee updateLeaveDays(@PathVariable Long id, @RequestBody Integer leaveDays) {
-        return employeeService.updateLeaveDays(id, leaveDays);
+    public Employee updateLeaveDays(@PathVariable Long id, @RequestBody Leave leave) {
+        return employeeService.updateLeaveDays(id, leave);
     }
 
     @PutMapping("/{id}/update-leave")

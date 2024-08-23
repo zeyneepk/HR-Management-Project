@@ -11,15 +11,16 @@ public class Leave {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee; // Hangi çalışanın izni olduğunu belirtir
 
-    @Column(name = "start_date")
+    @Column(name = "start_date", nullable = false)
     private Date startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "end_date", nullable = false)
     private Date endDate;
 
-    @Column(name = "daysRequested")
+    @Column(name = "days_requested", nullable = false)
     private int daysRequested; // Implies the requested leave days
 
     // Getters and setters
@@ -39,6 +40,21 @@ public class Leave {
         this.employee = employee;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
     public int getDaysRequested() {
         return daysRequested;

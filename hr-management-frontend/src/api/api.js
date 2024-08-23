@@ -17,7 +17,7 @@ export const addEmployee = (employee) => {
     });
 };
 
-// İzin Günlerini Güncelleme
+// İzin Günlerini Güncelleme (leaves tablosuna da ekliyor olleeey )
 export const updateLeaveDays = (id, leaveDays) => {
     
     
@@ -28,7 +28,7 @@ export const updateLeaveDays = (id, leaveDays) => {
     });
 };
 
-// Yeni İzin Girişi Ekleme  (leaves tablosuna)
+// Yeni İzin Girişi Ekleme  (şu an kullanılmıyor)
 export const addLeaveEntry  = (leaveEntry) => {
     return axios.post(`${API_URL}/leaves`, leaveEntry, {
         headers: {
