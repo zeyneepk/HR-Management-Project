@@ -34,7 +34,7 @@ const LeaveEntry = () => {
             
 
             updateLeaveDays(selectedEmployee, leaveEntry).then(response => {
-                setMessage(`İzin girişi başarılı: ${selectedEmployee} için ${leaveEntry.daysRequested} gün.`);
+                setMessage(`İzin girişi başarılı: ${selectedEmployee}.çalışan için ${leaveEntry.daysRequested} gün.`);
             }).catch(error => {
                 setMessage('İzin girişi başarısız!');
             });

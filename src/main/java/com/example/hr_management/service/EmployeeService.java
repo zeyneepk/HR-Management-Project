@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -40,16 +39,6 @@ public class EmployeeService {
                 .orElseThrow();
         employee.setLeaveDays(leaveDays);
         return employeeRepository.save(employee);
-    }
-
-    public boolean login(String email, String password) {
-        Optional<Employee> empOpt = employeeRepository.findByEmail(email);
-
-        if (empOpt.isPresent()) {
-            Employee employee = empOpt.get();
-            return employee.getPassword().equals(password);
-        }
-        return false;
     }
 
 }

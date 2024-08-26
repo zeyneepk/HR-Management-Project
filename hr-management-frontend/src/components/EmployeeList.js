@@ -13,13 +13,16 @@ const EmployeeList = () => {
         });
     }, []);
 
+
+    employees.sort((a, b) => a.id - b.id);
+
     return (
         <div className="employee-list-container">
             <h2>Çalışan Listesi</h2>
             <ul>
                 {employees.map(employee => (
                     <li key={employee.id}>
-                        {employee.firstName} {employee.lastName} - {employee.leaveDays} gün izin kaldı
+                        {employee.id} - {employee.firstName} {employee.lastName} - {employee.leaveDays} gün izin kaldı
                     </li>
                 ))}
             </ul>

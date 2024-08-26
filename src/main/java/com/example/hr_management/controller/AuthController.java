@@ -23,8 +23,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         // Basit bir doğrulama örneği
-        if ("a@a".equals(loginRequest.getEmail()) && "a".equals(loginRequest.getPassword())
-        || employeeService.login(loginRequest.getEmail(), loginRequest.getPassword()))
+        if ("a@a".equals(loginRequest.getEmail()) && "a".equals(loginRequest.getPassword()))
         {
             return ResponseEntity.ok().body(Collections.singletonMap("success", true));
         } else {
