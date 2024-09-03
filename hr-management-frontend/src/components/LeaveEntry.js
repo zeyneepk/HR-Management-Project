@@ -52,7 +52,7 @@ const LeaveEntry = () => {
                     <option value="">Çalışan Seç</option>
                     {employees.map(employee => (
                         <option key={employee.id} value={employee.id}>
-                            {employee.firstName} {employee.lastName}
+                            {employee.firstName} {employee.lastName} - {employee.leaveDays} gün 
                         </option>
                     ))}
                 </select>

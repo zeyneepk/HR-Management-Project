@@ -5,6 +5,7 @@ import EmployeeList from './components/EmployeeList';
 import AddEmployee from './components/AddEmployee';
 import LeaveEntry from './components/LeaveEntry';
 import UpdateLeaveLimit from './components/UpdateLeaveLimit';
+import AddAdmin from './components/AddAdmin';
 import './styles.css'; // Global CSS dosyasını dahil et
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                                 <li><Link to="/leave">İzin Girişi</Link></li>
                                 <li><Link to="/employee-list">Çalışan Listeleme</Link></li>
                                 <li><Link to="/update-leave">İzin Hakkı Güncelleme</Link></li>
+                                <li><Link to="/add-admin">Admin Ekleme</Link></li>
                             </ul>
                         </div>
                     } />
@@ -31,6 +33,7 @@ function App() {
                     <Route path="/leave" element={<LeaveEntry />} />
                     <Route path="/employee-list" element={<EmployeeList />} />
                     <Route path="/update-leave" element={<UpdateLeaveLimit />} />
+                    <Route path="/add-admin" element={<AddAdmin />} />
                 </Routes>
             </div>
         </Router>

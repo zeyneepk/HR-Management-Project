@@ -8,9 +8,32 @@ export const getEmployees = () => {
     return axios.get(`${API_URL}/employees`);
 };
 
+// Departmanları Getirme
+export const getDepartments = async () => {
+    return axios.get(`${API_URL}/departments`);
+};
+
 // Yeni Çalışan Ekleme
 export const addEmployee = (employee) => {
     return axios.post(`${API_URL}/employees`, employee, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+};
+
+// Yeni Departman Ekleme
+export const addDepartment = (department) => {
+    return axios.post(`${API_URL}/departments`, department, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+};
+
+// Admin Ekleme
+export const addAdmin = (admin) => {
+    return axios.post(`${API_URL}/admins`, admin, {
         headers: {
             'Content-Type': 'application/json'
         }

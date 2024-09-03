@@ -13,21 +13,36 @@ const EmployeeList = () => {
         });
     }, []);
 
-
+    // Employees are sorted by their IDs
     employees.sort((a, b) => a.id - b.id);
 
     return (
         <div className="employee-list-container">
             <h2>Çalışan Listesi</h2>
-            <ul>
-                {employees.map(employee => (
-                    <li key={employee.id}>
-                        {employee.id} - {employee.firstName} {employee.lastName} - {employee.leaveDays} gün izin kaldı
-                    </li>
-                ))}
-            </ul>
-            <Link to="/home">Ana Sayfaya Dön</Link>
-            <Link to="/">Çıkış Yap</Link>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Kalan İzin Günleri</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {employees.map(employee => (
+                        <tr key={employee.id}>
+                            <td>{employee.id}</td>
+                            <td>{employee.firstName}</td>
+                            <td>{employee.lastName}</td>
+                            <td>{employee.leaveDays} gün</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <div className="button-container">
+                <Link to="/home" className="button">Ana Sayfaya Dön</Link>
+                <Link to="/" className="button">Çıkış Yap</Link>
+            </div>
         </div>
     );
 };

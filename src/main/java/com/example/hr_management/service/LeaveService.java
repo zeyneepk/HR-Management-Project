@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class LeaveService {
     @Autowired
     private LeaveRepository leaveRepository;
-
     @Autowired
     private EmployeeRepository employeeRepository;
 

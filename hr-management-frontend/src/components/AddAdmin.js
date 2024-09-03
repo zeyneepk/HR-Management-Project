@@ -1,28 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { addEmployee, getDepartments, addDepartment } from '../api/api';
+import { addAdmin } from '../api/api';
 
-const AddEmployee = () => {
-    const [employee, setEmployee] = useState({
+const AddAdmin = () => {
+    const [admin, setAdmin] = useState({
         firstName: '',
         lastName: '',
-        department: '',
         email: '',
         password: ''
     });
 
-    const [departments, setDepartments] = useState([]);
     const [message, setMessage] = useState('');
-    const [newDepartment, setNewDepartment] = useState('');
-    const [isAddingDepartment, setIsAddingDepartment] = useState(false);
-
+    
     useEffect(() => {
-        getDepartments().then(response => {
-            setDepartments(response.data);
-        }).catch(error => {
-            console.error('Error fetching departments:', error);
-        });
-
+        
         // Custom validation for email
         const emailInput = document.getElementById('email');
         if (emailInput) {
@@ -67,58 +58,27 @@ const AddEmployee = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setEmployee({ ...employee, [name]: value });
-    };
-
-    const handleDepartmentChange = (e) => {
-        const selectedDept = e.target.value;
-        if (selectedDept === 'new') {
-            setIsAddingDepartment(true);
-        } else {
-            setEmployee({ ...employee, department: selectedDept });
-            setIsAddingDepartment(false);
-        }
-    };
-
-    const handleNewDepartmentChange = (e) => {
-        setNewDepartment(e.target.value);
-    };
-
-    const handleAddDepartment = () => {
-        addDepartment({ department_name: newDepartment }).then(response => {
-            setEmployee({ 
-                ...employee, 
-                department: response.data.id 
-            });
-            setDepartments([...departments, response.data]);
-            setIsAddingDepartment(false);
-            setNewDepartment('');
-            setMessage('Yeni departman başarıyla eklendi.');
-        }).catch(error => {
-            console.error('Error adding department:', error);
-            setMessage('Departman eklenirken bir hata oluştu.');
-        });
+        setAdmin({ ...admin, [name]: value });
     };
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        addEmployee(employee).then(response => {
-            setMessage('Çalışan başarıyla eklendi.');
-            setEmployee({
+        addAdmin(admin).then(response => {
+            setMessage('Admin başarıyla eklendi.');
+            setAdmin({
                 firstName: '',
                 lastName: '',
-                department: '',
                 email: '',
                 password: ''
             });
         }).catch(error => {
-            setMessage('Çalışan eklenirken bir hata oluştu.');
+            setMessage('Admin eklenirken bir hata oluştu.');
         });
     };
 
     return (
         <div className="form-container">
-            <h2>Çalışan Veri Girişi</h2>
+            <h2>Admin Veri Girişi</h2>
             {message && <p>{message}</p>}
             <form onSubmit={handleSubmit}>
                 <input
@@ -126,7 +86,7 @@ const AddEmployee = () => {
                     name="firstName"
                     placeholder="Ad"
                     onChange={handleChange}
-                    value={employee.firstName}
+                    value={admin.firstName}
                     required
                 />
                 <input
@@ -134,39 +94,9 @@ const AddEmployee = () => {
                     name="lastName"
                     placeholder="Soyad"
                     onChange={handleChange}
-                    value={employee.lastName}
+                    value={admin.lastName}
                     required
                 />
-
-                <select
-                    name="department"
-                    onChange={handleDepartmentChange}
-                    value={employee.department}
-                    required
-                >
-                    <option value="">Departman Seç</option>
-                    {departments.map(department => (
-                        <option key={department.id} value={department.id}>
-                            {department.department_name}
-                        </option>
-                    ))}
-                    <option value="new">Yeni Departman Ekle</option>
-                </select>
-
-                {isAddingDepartment && (
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Yeni Departman Adı"
-                            onChange={handleNewDepartmentChange}
-                            value={newDepartment}
-                            required
-                        />
-                        <button type="button" onClick={handleAddDepartment}>
-                            Departmanı Ekle
-                        </button>
-                    </div>
-                )}
 
                 <input
                     type="email"
@@ -174,7 +104,7 @@ const AddEmployee = () => {
                     id="email"
                     placeholder="Email"
                     onChange={handleChange}
-                    value={employee.email}
+                    value={admin.email}
                     required
                 />
                 <input
@@ -183,7 +113,7 @@ const AddEmployee = () => {
                     id="password"
                     placeholder="Password"
                     onChange={handleChange}
-                    value={employee.password}
+                    value={admin.password}
                     required
                 />
                 <button type="submit">Kaydet</button>
@@ -194,4 +124,4 @@ const AddEmployee = () => {
     );
 };
 
-export default AddEmployee;
+export default AddAdmin;
