@@ -25,5 +25,4 @@ public class DepartmentController {
         return departmentService.addDepartment(department);
     }
 
-
 }
