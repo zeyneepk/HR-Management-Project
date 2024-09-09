@@ -31,6 +31,6 @@ public class Leave {
     private Date endDate;
 
     @Column(name = "days_requested", nullable = false)
-    private int daysRequested; // Implies the requested leave days
+    private Integer daysRequested; // Implies the requested leave days
 
 }

@@ -4,6 +4,7 @@ import com.example.hr_management.model.Admin;
 import com.example.hr_management.repository.AdminRepository;
 import com.example.hr_management.repository.EmployeeRepository;
 import com.example.hr_management.repository.LeaveRepository;
+import com.example.hr_management.exception.AdminNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,8 @@ public class AdminService {
     }
 
     public Admin findByEmail(String email) {
-        return adminRepository.findByEmail(email);
+        return adminRepository.findByEmail(email)
+                .orElseThrow(() -> new AdminNotFoundException("Admin with email " + email + " not found"));
     }
 
 }

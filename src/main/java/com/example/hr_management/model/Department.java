@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter
@@ -21,4 +22,5 @@ public class Department {
     private Long id;
 
     private String department_name;
+
 }
