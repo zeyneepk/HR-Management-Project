@@ -12,9 +12,12 @@ const AddEmployee = () => {
     });
 
     const [departments, setDepartments] = useState([]);
-    const [message, setMessage] = useState('');
+    const [filteredDepartments, setFilteredDepartments] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const [newDepartment, setNewDepartment] = useState('');
     const [isAddingDepartment, setIsAddingDepartment] = useState(false);
+    const [message, setMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState(''); // New state for handling errors
 
     useEffect(() => {
         getDepartments().then(response => {
@@ -22,7 +25,7 @@ const AddEmployee = () => {
         }).catch(error => {
             console.error('Error fetching departments:', error);
         });
-
+        
         // Custom validation for email
         const emailInput = document.getElementById('email');
         if (emailInput) {
@@ -70,56 +73,71 @@ const AddEmployee = () => {
         setEmployee({ ...employee, [name]: value });
     };
 
-    const handleDepartmentChange = (e) => {
-        const selectedDept = e.target.value;
-        if (selectedDept === 'new') {
-            setIsAddingDepartment(true);
-        } else {
-            setEmployee({ ...employee, department: selectedDept });
-            setIsAddingDepartment(false);
-        }
+    const handleDepartmentSearchChange = (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+
+        // Filter departments based on input
+        setFilteredDepartments(
+            departments.filter(dept =>
+                dept.department_name.toLowerCase().includes(query.toLowerCase())
+            )
+        );
     };
 
-    const handleNewDepartmentChange = (e) => {
-        setNewDepartment(e.target.value);
+    const handleSelectDepartment = (deptName) => {
+        setEmployee({ ...employee, department: deptName });
+        setSearchQuery(deptName);
+        setFilteredDepartments([]); // Hide dropdown after selection
     };
 
     const handleAddDepartment = () => {
-        addDepartment({ department_name: newDepartment }).then(response => {
-            setEmployee({ 
-                ...employee, 
-                department: response.data.id 
+        if (newDepartment.trim()) {
+            addDepartment({ department_name: newDepartment }).then(response => {
+                setDepartments([...departments, response.data]);
+                setEmployee({ ...employee, department: response.data.id});
+                setMessage('Yeni departman başarıyla eklendi.');
+                setNewDepartment('');
+                setIsAddingDepartment(false);
+            }).catch(error => {
+                console.error('Error adding department:', error);
+                setMessage('Departman eklenirken bir hata oluştu.');
             });
-            setDepartments([...departments, response.data]);
-            setIsAddingDepartment(false);
-            setNewDepartment('');
-            setMessage('Yeni departman başarıyla eklendi.');
-        }).catch(error => {
-            console.error('Error adding department:', error);
-            setMessage('Departman eklenirken bir hata oluştu.');
-        });
+        } else {
+            setMessage('Departman adı boş olamaz.');
+        }
     };
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        addEmployee(employee).then(response => {
-            setMessage('Çalışan başarıyla eklendi.');
-            setEmployee({
-                firstName: '',
-                lastName: '',
-                department: '',
-                email: '',
-                password: ''
+        setErrorMessage('');  // Clear previous error messages
+        addEmployee(employee)
+            .then(response => {
+                setMessage('Çalışan başarıyla eklendi.');
+                setEmployee({
+                    firstName: '',
+                    lastName: '',
+                    department: '',
+                    email: '',
+                    password: ''
+                });
+                setSearchQuery('');
+            })
+            .catch(error => {
+                if (error.response && error.response.status === 400) {
+                    // Handle specific backend error (e.g., duplicate email or invalid input)
+                    setErrorMessage(error.response.data); // Show the error message from the backend
+                } else {
+                    setMessage('Çalışan eklenirken bir hata oluştu.');
+                }
             });
-        }).catch(error => {
-            setMessage('Çalışan eklenirken bir hata oluştu.');
-        });
     };
 
     return (
         <div className="form-container">
             <h2>Çalışan Veri Girişi</h2>
             {message && <p>{message}</p>}
+            {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -138,29 +156,42 @@ const AddEmployee = () => {
                     required
                 />
 
-                <select
-                    name="department"
-                    onChange={handleDepartmentChange}
-                    value={employee.department}
-                    required
-                >
-                    <option value="">Departman Seç</option>
-                    {departments.map(department => (
-                        <option key={department.id} value={department.id}>
-                            {department.department_name}
-                        </option>
-                    ))}
-                    <option value="new">Yeni Departman Ekle</option>
-                </select>
+                {/* Department Dropdown with Search */}
+                <div className="department-input-container">
+                    <input
+                        type="text"
+                        placeholder="Departman Ara"
+                        value={searchQuery}
+                        onChange={handleDepartmentSearchChange}
+                    />
+                    {filteredDepartments.length > 0 && (
+                        <ul className="department-dropdown">
+                            {filteredDepartments.map(dept => (
+                                <li key={dept.id} onClick={() => handleSelectDepartment(dept.department_name)}>
+                                    {dept.department_name}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
 
+                {/* Button to add new department if not found */}
+                <div style={{ marginTop: '10px' }}>
+                    <button
+                        type="button"
+                        onClick={() => setIsAddingDepartment(true)}>
+                        Yeni Departman Ekle
+                    </button>
+                </div>
+
+                {/* New Department Input */}
                 {isAddingDepartment && (
                     <div>
                         <input
                             type="text"
                             placeholder="Yeni Departman Adı"
-                            onChange={handleNewDepartmentChange}
+                            onChange={(e) => setNewDepartment(e.target.value)}
                             value={newDepartment}
-                            required
                         />
                         <button type="button" onClick={handleAddDepartment}>
                             Departmanı Ekle

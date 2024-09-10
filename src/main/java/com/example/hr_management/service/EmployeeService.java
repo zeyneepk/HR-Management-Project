@@ -29,6 +29,10 @@ public class EmployeeService {
             throw new InvalidEmployeeException("Employee name cannot be null or empty");
         }
 
+        if (employeeRepository.existsByEmail(employee.getEmail())) {
+            throw new InvalidEmployeeException("Email already exists. Please use a different email.");
+        }
+
         return employeeRepository.save(employee);
     }
 

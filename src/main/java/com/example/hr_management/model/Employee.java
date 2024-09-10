@@ -6,13 +6,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.checkerframework.common.aliasing.qual.Unique;
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name = "employees")
+@Table(name = "employees", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Employee {
 
     @Id
@@ -23,6 +24,7 @@ public class Employee {
 
     private String lastName;
 
+    @Email(message = "Please provide a valid email address.")
     private String email;
 
     private String department;
