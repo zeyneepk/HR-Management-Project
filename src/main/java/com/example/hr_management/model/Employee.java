@@ -1,12 +1,13 @@
 package com.example.hr_management.model;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.checkerframework.common.aliasing.qual.Unique;
 
 @Getter
 @Setter
@@ -14,6 +15,7 @@ import org.checkerframework.common.aliasing.qual.Unique;
 @EqualsAndHashCode
 @Entity
 @Table(name = "employees", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@NoArgsConstructor
 public class Employee {
 
     @Id
@@ -33,4 +35,5 @@ public class Employee {
     private int leaveDays = 15;
 
     private String password;
+
 }
