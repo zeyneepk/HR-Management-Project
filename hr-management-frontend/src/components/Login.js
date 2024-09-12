@@ -14,6 +14,7 @@ const Login = () => {
             const response = await axios.post('http://localhost:8080/api/login', { email, password });
             if (response.data.success) {
                 // Login başarılı, kullanıcıyı yönlendir
+                localStorage.setItem('userToken', 'token123');
                 navigate('/home');
             } else {
                 setError('Giriş başarısız! Bilgilerinizi kontrol edin.');
