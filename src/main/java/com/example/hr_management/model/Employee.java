@@ -29,7 +29,7 @@ public class Employee {
     @Email(message = "Please provide a valid email address.")
     private String email;
 
-    private String department;
+    private int department;
 
     @Min(value = 0, message = "İzin günleri negatif olamaz.")
     private int leaveDays = 15;

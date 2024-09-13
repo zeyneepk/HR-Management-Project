@@ -85,8 +85,8 @@ const AddEmployee = () => {
         );
     };
 
-    const handleSelectDepartment = (deptName) => {
-        setEmployee({ ...employee, department: deptName });
+    const handleSelectDepartment = (deptId, deptName) => {
+        setEmployee({ ...employee, department: deptId });
         setSearchQuery(deptName);
         setFilteredDepartments([]); // Hide dropdown after selection
     };
@@ -167,7 +167,10 @@ const AddEmployee = () => {
                     {filteredDepartments.length > 0 && (
                         <ul className="department-dropdown">
                             {filteredDepartments.map(dept => (
-                                <li key={dept.id} onClick={() => handleSelectDepartment(dept.department_name)}>
+                                <li
+                                    key={dept.id}
+                                    onClick={() => handleSelectDepartment(dept.id, dept.department_name)}
+                                >
                                     {dept.department_name}
                                 </li>
                             ))}
